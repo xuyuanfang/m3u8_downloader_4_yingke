@@ -1,6 +1,6 @@
 # m3u8_downloader_4_yingke
 ## 映客m3u8格式历史直播记录下载器
-![demo_gif](/img/demo.gif)
+![demo_gif](/img/demo4python.gif)
 
 网址分析
 ------------
@@ -22,7 +22,7 @@ http://www.inke.cn/live.html?uid=3677006&id=1481727812972630
 
 环境要求
 ------------
-- Python 2.7
+- Python 2.7（小白不作要求）
 
 ###### 备注：Python 3 理论上支持，但并未测试，欢迎反馈！
 
@@ -44,7 +44,7 @@ cd 切换到Python程序的目录
 ###### 备注：使用前需要配置Python环境，建议使用Anaconda
 ###### 友情链接：获取最新Anaconda下载信息 [传送门](https://www.continuum.io/downloads)
 
-#### 方法二（CMD 下工作）
+#### 方法二（CMD 下工作）【小白推荐】
 Windows 10为例
 
 开始——右键——命令提示符（管理员）
