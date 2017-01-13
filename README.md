@@ -29,6 +29,8 @@ http://www.inke.cn/live.html?uid=3677006&id=1481727812972630
 
 使用方法
 ------------
+
+#### 方法一（Python 2.7 下工作）
 Windows 10为例
 
 开始——右键——命令提示符（管理员）
@@ -42,6 +44,16 @@ cd 切换到Python程序的目录
 ###### 备注：使用前需要配置Python环境，建议使用Anaconda
 ###### 友情链接：获取最新Anaconda下载信息 [传送门](https://www.continuum.io/downloads)
 
+#### 方法二（CMD 下工作）
+Windows 10为例
+
+开始——右键——命令提示符（管理员）
+
+cd 切换到exe4windows文件夹的目录
+
+输入命令 main.exe
+
+根据命令提示进行操作
 
 未来可能更新的地方
 ----------
@@ -51,7 +63,12 @@ cd 切换到Python程序的目录
 
 demo工作示意图
 -----------
-![demo_gif](/img/demo.gif)
+
+#### Python 2.7 下工作（花费72秒）
+![demo_gif](/img/demo4python.gif)
+
+#### CMD 下工作（花费148秒）
+![demo_gif](/img/demo4cmd.gif)
 
 更新日志
 -----------
