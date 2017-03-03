@@ -1,5 +1,6 @@
 # m3u8_downloader_4_yingke
 ## 映客m3u8格式历史直播记录下载器
+## 目前已经实现了ffmpeg合并视频片段，程序将这日更新，如有需要，可与我联系索取
 ![demo_gif](/img/demo4python.gif)
 
 网址分析
