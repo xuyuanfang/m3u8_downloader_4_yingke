@@ -16,6 +16,19 @@ sys.setdefaultencoding('utf8')
 
 
 ##############################################################################################################
+def read_id():
+    yingke_url = raw_input("Input yingke_id:") + '='
+    scan_m3u8_fileid = re.findall('[0-9]+', yingke_url)
+    while scan_m3u8_fileid == []:
+        yingke_url = raw_input("Input yingke_id:") + '='
+        scan_m3u8_fileid = re.findall('[0-9]+', yingke_url)
+    m3u8_fileid = scan_m3u8_fileid[0]
+    m3u8_filename = m3u8_fileid + '.m3u8'
+    m3u8_url = 'http://record2.inke.cn/record_' + m3u8_fileid + '/' + m3u8_filename
+    savepath_filename = path + '\\' + m3u8_filename
+    downloader(m3u8_url, savepath_filename)
+    m3u8_info = get_m3u8_info(m3u8_filename)
+    return m3u8_info, m3u8_filename
 
 def get_m3u8_filename(path):
     listfile = os.listdir(path)
@@ -58,19 +71,19 @@ m3u8_filename = get_m3u8_filename(path)
 try:
     m3u8_info = get_m3u8_info(m3u8_filename)
     m3u8_fileid = re.findall('[0-9]+', m3u8_filename)[0]
+    useM3u8= raw_input("m3u8 file is found! Do you wanna use it for downloading?(Yes or No):")
+    if (useM3u8=='Yes' or useM3u8=='yes' or useM3u8=='Y' or useM3u8=='y'):
+        print 'downloading is starting!'
+    elif (useM3u8=='No' or useM3u8=='no' or useM3u8=='N' or useM3u8=='n'):
+        m3u8_read = read_id()
+        m3u8_info = m3u8_read[0]
+        m3u8_filename = m3u8_read[1]
 except:
     print 'm3u8 file is not found!'
-    yingke_url = raw_input("Input yingke_id:") + '='
-    scan_m3u8_fileid = re.findall('[0-9]+', yingke_url)
-    while scan_m3u8_fileid == []:
-        yingke_url = raw_input("Input yingke_id:") + '='
-        scan_m3u8_fileid = re.findall('[0-9]+', yingke_url)
-    m3u8_fileid = scan_m3u8_fileid[0]
-    m3u8_filename = m3u8_fileid + '.m3u8'
-    m3u8_url = 'http://record2.inke.cn/record_' + m3u8_fileid + '/' + m3u8_filename
-    savepath_filename = path + '\\' + m3u8_filename
-    downloader(m3u8_url, savepath_filename)
-    m3u8_info = get_m3u8_info(m3u8_filename)
+    m3u8_read = read_id()
+    m3u8_info = m3u8_read[0]
+    m3u8_filename = m3u8_read[1]
+
 
 id = re.findall('[0-9]+', m3u8_filename)[0]
 
