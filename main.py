@@ -6,7 +6,7 @@ Created on 20170113
 """
 
 import re
-from join import join
+# from join import join
 import requests
 import shutil
 import datetime
@@ -46,8 +46,12 @@ def downloader(url, savepath_filename):
 ##############################################################################################################
 
 path = os.getcwd()
-tmp_path = path + '\\ts\\'
-if not os.path.exists(tmp_path):
+tmp_path = path + '\\tmp\\'
+
+if os.path.exists(tmp_path):
+    shutil.rmtree(tmp_path)
+    os.mkdir(tmp_path)
+else:
     os.makedirs(tmp_path)
 
 m3u8_filename = get_m3u8_filename(path)
@@ -76,24 +80,36 @@ starttime = datetime.datetime.now()
 
 url_ = 'http://record2.inke.cn/record_'
 for i in xrange(m3u8_num):
-    print 'Downloading and writing ' + m3u8_info[i] + ' ['+ str(i + 1) +'/' + str(m3u8_num) + ']'
+    filename = str(i + 1) + '.ts'
+    print 'Downloading and writing ' + filename + ' ['+ str(i + 1) +'/' + str(m3u8_num) + ']'
     ts_url = url_ + id + '/' + m3u8_info[i]
-    savepath_filename = path + '\\ts\\' + m3u8_info[i]
+    savepath_filename = path + '\\tmp\\' + filename# m3u8_info[i]
     downloader(ts_url, savepath_filename)
     untilnowtime = datetime.datetime.now()
     interval = (untilnowtime - starttime).seconds
     print 'Saved and past ' + str(interval) + 's'
 
-fromdir = path + '\\ts\\'
-tofile = path + '\\' + m3u8_fileid + '.ts'
-
 print 'Combining all files'
-join(fromdir, tofile)
+# join(fromdir, tofile)
+ts_info_dir = path + '\\tmp\\' + 'ts_info.txt'
+output = open(ts_info_dir, 'a')
+for i in xrange(m3u8_num):
+    line_info = "file '" + str(i + 1) + ".ts'" + '\n'
+    output.write(line_info)
+output.close()
+
+os.chdir(tmp_path)
+cmd = path + '\\ffmpeg\\bin\\ffmpeg.exe -f concat -i ' + path + '\\tmp\\ts_info.txt -c copy ' + path + '\\allinone.ts'
+os.system(cmd)
+
 print 'Combine successful!'
-shutil.rmtree(fromdir)
-os.mkdir(fromdir)
+os.chdir(path)
+shutil.rmtree(tmp_path)
+os.mkdir(tmp_path)
 print 'Cleaned temp successful!'
 
 endtime = datetime.datetime.now()
 interval = (endtime - starttime).seconds
 print 'Total time is ' + str(interval/60) + ' min (' + str(interval) + ' s )'
+
+#1481727812972630
